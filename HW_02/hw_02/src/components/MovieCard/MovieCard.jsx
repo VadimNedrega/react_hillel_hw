@@ -1,8 +1,9 @@
 import Button from "../Button/Button";
+import "./MovieCard.css";
 
 function MovieCard({ movie, onSelectMovie }) {
     return (
-    <div style={{ border: "1px solid white", margin: 10, padding: 10 }}>
+    <div className="movie-card">
       <h2><b>{movie.title}</b></h2>
       <p>{movie.year}</p>
       <p>{movie.genre}</p>
