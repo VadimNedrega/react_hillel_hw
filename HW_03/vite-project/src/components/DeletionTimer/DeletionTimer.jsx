@@ -41,6 +41,12 @@ function DeletionTimer({ setIsActive }) {
         }
     }, [])
 
+    useEffect(() => {
+        if (list.length === 0) {
+            setIsRunning(false);
+        }
+    }, [list.length]);
+
     return (
         <>
             <h2>Deletion Timer</h2>
