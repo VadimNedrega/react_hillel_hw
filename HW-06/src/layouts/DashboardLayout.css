@@ -1,0 +1,13 @@
+.dashboard {
+  display: flex;
+  gap: 20px;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 10px;
+}
+
+.content {
+  flex: 1;
+}
