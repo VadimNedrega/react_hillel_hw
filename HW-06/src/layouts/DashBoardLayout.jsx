@@ -1,34 +1,18 @@
-import { Outlet, NavLink } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import "./DashboardLayout.css";
 import { ROUTES } from '../router/routesPaths';
+import Sidebar from '../components/dashboard/Sidebar';
+import Header from '../components/dashboard/Header';
 
 
 function DashboardLayout() {
   return (
     <div className="dashboard">
       
-      <div className="sidebar">
-        <h2>Dashboard</h2>
-
-        <nav>
-          <ul>
-            <li>
-              <NavLink to={ROUTES.dashboard.map}>Map</NavLink>
-            </li>
-            <li>
-              <NavLink to={ROUTES.dashboard.analytics}>Analytics</NavLink>
-            </li>
-            <li>
-              <NavLink to={ROUTES.dashboard.favorites}>Favorites</NavLink>
-            </li>
-            <li>
-              <NavLink to={ROUTES.dashboard.profile}>Profile</NavLink>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Sidebar />
 
       <div className="content">
+        <Header />
         <Outlet />
       </div>
 

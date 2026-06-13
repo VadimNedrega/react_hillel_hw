@@ -1,16 +1,19 @@
-import { useLoaderData } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {ROUTES} from "../router/routesPaths"
+import { ROUTES } from "../router/routesPaths"
+import { useLocations } from "../hooks/useLocations";
 
 function MapRoute() {
-  const locations = useLoaderData();
+  const { data, isLoading, isError } = useLocations();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error loading locations</p>;
 
   return (
     <div>
       <h1>Map</h1>
 
       <ul>
-        {locations.map((item) => (
+        {(data || []).map((item) => (
           <li key={item.id}>
             <div>{item.name}</div>
             <div>{item.address}</div>

@@ -1,0 +1,18 @@
+import { useMutation } from "@tanstack/react-query";
+import { authApi } from "../api/authApi";
+import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router-dom";
+
+export const useRegister = () => {
+  const setAuth = useAuthStore((state) => state.setAuth);
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationFn: authApi.register,
+
+    onSuccess: (user) => {
+      setAuth(user);
+      navigate("/dashboard/map");
+    },
+  });
+};

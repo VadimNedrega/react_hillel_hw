@@ -1,22 +1,29 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import LoginRoute from "../routs/LoginRoute";
-import RegisterRoute from "../routs/RegisterRoute";
+import LoginRoute from "../routes/LoginRoute";
+import RegisterRoute from "../routes/RegisterRoute";
 import DashboardLayout from "../layouts/DashBoardLayout";
-import MapRoute from "../routs/MapRoute";
-import AnalyticsRoute from "../routs/AnalyticsRoute";
-import FavoritesRoute from "../routs/FavoritesRoute";
-import ProfileRoute from "../routs/ProfileRoute";
-import LocationDetailsRoute from "../routs/LocationDetailsRoute";
+import MapRoute from "../routes/MapRoute";
+import AnalyticsRoute from "../routes/AnalyticsRoute";
+import FavoritesRoute from "../routes/FavoritesRoute";
+import ProfileRoute from "../routes/ProfileRoute";
+import LocationDetailsRoute from "../routes/LocationDetailsRoute";
 import AuthLayout from "../layouts/AuthLayout";
-import ErrorRoute from "../routs/ErrorRoute";
+import ErrorRoute from "../routes/ErrorRoute";
+import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute";
+import HomeRoute from "../routes/HomeRoute";
 
 import { locationsService } from "../services/locations";
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <AuthLayout />,
+        element: <HomeRoute />,
+        errorElement: <ErrorRoute />
+    },
+    {
+        element: <PublicRoute />,
         errorElement: <ErrorRoute />,
 
         children: [
@@ -27,37 +34,25 @@ export const router = createBrowserRouter([
             {
                 path: 'register',
                 element: <RegisterRoute />,
-            },
-            {
-                path: 'dashboard',
-                element: <DashboardLayout />,
-                errorElement: <ErrorRoute />,
+            }
+        ],
+    },
+    {
+        path: 'dashboard',
+        element: <ProtectedRoute />,
+        errorElement: <ErrorRoute />,
 
+        children: [
+            {
+                element: <DashboardLayout />,
                 children: [
-                    {
-                        path: "map",
-                        element: <MapRoute />,
-                        loader: async () => locationsService.getAll(),
-                    },
-                    {
-                        path: 'analytics',
-                        element: <AnalyticsRoute />,
-                    },
-                    {
-                        path: 'favorites',
-                        element: <FavoritesRoute />,
-                    },
-                    {
-                        path: 'profile',
-                        element: <ProfileRoute />,
-                    },
-                    {
-                        path: "location/:id",
-                        element: <LocationDetailsRoute />,
-                        loader: async ({ params }) => locationsService.getById(params.id),
-                    }
+                    { path: "map", element: <MapRoute /> },
+                    { path: "analytics", element: <AnalyticsRoute /> },
+                    { path: "favorites", element: <FavoritesRoute /> },
+                    { path: "profile", element: <ProfileRoute /> },
+                    { path: "location/:id", element: <LocationDetailsRoute /> }
                 ]
-            },
+            }
         ]
     }
 ])
