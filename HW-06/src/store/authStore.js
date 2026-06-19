@@ -18,6 +18,12 @@ export const useAuthStore = create(
           user: null,
           isAuthenticated: false,
         }),
+        updateUser: (updates) =>
+        set((state) => ({
+          user: state.user
+            ? { ...state.user, ...updates }
+            : state.user,
+        })),
     }),
     {
       name: "auth-storage",

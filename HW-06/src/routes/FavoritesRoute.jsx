@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
 import { useFavoritesStore } from "../store/favoriteStore";
 import { useLocations } from "../hooks/useLocations";
+import { Heart } from "lucide-react";
+import FavoritesList from "../components/favorites/FavoriteList";
+import Loader from "../components/ui/Loader";
 
 function FavoritesRoute() {
   const favoriteIds = useFavoritesStore((s) => s.favoriteIds);
@@ -8,7 +10,7 @@ function FavoritesRoute() {
 
   const { data: locations, isLoading, isError } = useLocations();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   if (isError) return <p>Error loading favorites</p>;
 
   const favoriteLocations = (locations || []).filter((loc) =>
@@ -16,30 +18,26 @@ function FavoritesRoute() {
   );
 
   if (favoriteLocations.length === 0) {
-    return <p>No favorite locations yet</p>;
+    return (
+      <div className="text-center text-gray-500 mt-10">
+        <Heart className="mx-auto mb-2 opacity-40" />
+        No favorite locations yet
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Favorites</h1>
+    <div className="space-y-4">
 
-      <ul>
-        {favoriteLocations.map((loc) => (
-          <li key={loc.id}>
-            <h3>{loc.name}</h3>
-            <p>{loc.address}</p>
-            <p>{loc.type}</p>
+      <h1 className="text-2xl font-semibold text-gray-800">
+        Favorites
+      </h1>
 
-            <Link to={`/dashboard/location/${loc.id}`}>
-              View details
-            </Link>
+      <FavoritesList
+        locations={favoriteLocations}
+        onRemove={removeFavorite}
+      />
 
-            <button onClick={() => removeFavorite(loc.id)}>
-              Remove from favorites
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

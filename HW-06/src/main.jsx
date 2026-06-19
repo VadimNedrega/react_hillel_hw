@@ -1,6 +1,16 @@
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <App />
-)
+import { Toaster } from "sonner";
+
+import "leaflet/dist/leaflet.css";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <>
+    <App />
+    <Toaster richColors position="top-right" />
+  </>
+);

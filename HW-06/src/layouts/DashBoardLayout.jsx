@@ -1,23 +1,24 @@
-import { Outlet } from 'react-router-dom'
-import "./DashboardLayout.css";
-import { ROUTES } from '../router/routesPaths';
-import Sidebar from '../components/dashboard/Sidebar';
-import Header from '../components/dashboard/Header';
-
+import { Outlet } from "react-router-dom";
+import Sidebar from "../components/dashboard/Sidebar";
+import Header from "../components/dashboard/Header";
 
 function DashboardLayout() {
   return (
-    <div className="dashboard">
-      
+    <div className="min-h-screen bg-background flex">
       <Sidebar />
 
-      <div className="content">
+      <div className="flex flex-1 flex-col">
         <Header />
-        <Outlet />
-      </div>
 
+        <main
+          className="p-6 min-h-screen"
+          style={{ backgroundColor: "#eaebeb" }}
+        >
+          <Outlet />
+        </main>
+      </div>
     </div>
-  )
+  );
 }
 
-export default DashboardLayout
+export default DashboardLayout;
