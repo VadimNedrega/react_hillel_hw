@@ -55,7 +55,7 @@ export const LoginForm = () => {
           disabled={isSubmitting}
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
         >
-          {isSubmitting ? "Logging in..." : "Login"}
+          {login.isPending ? "Logging in..." : "Login"}
         </button>
 
         {login.isError && (

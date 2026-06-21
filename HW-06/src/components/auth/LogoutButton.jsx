@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
+import { ROUTES } from "../../router/routesPaths"
 
 function LogoutButton() {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ function LogoutButton() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate(ROUTES.auth.login);
   };
 
   return (

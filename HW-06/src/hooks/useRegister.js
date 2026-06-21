@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { authApi } from "../api/authApi";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../router/routesPaths"
 
 export const useRegister = () => {
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -12,7 +13,7 @@ export const useRegister = () => {
 
     onSuccess: (user) => {
       setAuth(user);
-      navigate("/dashboard/map");
+      navigate(ROUTES.dashboard.map);
     },
   });
 };

@@ -10,18 +10,13 @@ async function updateProfileRequest({ id, data }) {
 export function useUpdateProfile() {
     const queryClient = useQueryClient();
     const setAuthUser = useAuthStore((s) => s.updateUser);
-
     const user = useAuthStore((s) => s.user);
 
     return useMutation({
         mutationFn: updateProfileRequest,
 
         onSuccess: (updatedUser) => {
-            queryClient.setQueryData(
-                ["profile", setAuthUser.id],
-                updatedUser
-            );
-
+            queryClient.setQueryData(["profile", user.id], updatedUser);
             setAuthUser(updatedUser);
         },
     });

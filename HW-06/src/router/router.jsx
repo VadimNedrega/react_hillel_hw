@@ -14,7 +14,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import HomeRoute from "../routes/HomeRoute";
 
-import { locationsService } from "../services/locations";
+import { locationsService } from "../api/locationsApi";
 
 export const router = createBrowserRouter([
     {
@@ -28,13 +28,18 @@ export const router = createBrowserRouter([
 
         children: [
             {
-                path: 'login',
-                element: <LoginRoute />,
+                element: <AuthLayout />,
+                children: [
+                    {
+                        path: "login",
+                        element: <LoginRoute />,
+                    },
+                    {
+                        path: "register",
+                        element: <RegisterRoute />,
+                    },
+                ],
             },
-            {
-                path: 'register',
-                element: <RegisterRoute />,
-            }
         ],
     },
     {

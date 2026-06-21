@@ -6,6 +6,7 @@ import { useUpdateProfile } from "../../hooks/useUpdateProfile";
 import { useAuthStore } from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { ROUTES } from "../../router/routesPaths"
 import Loader from "../ui/Loader"
 
 const profileSchema = z.object({
@@ -45,7 +46,7 @@ function EditProfileForm() {
 
                     toast.success("Profile updated successfully");
 
-                    navigate("/dashboard/map");
+                    navigate(ROUTES.dashboard.map);
                 }
             }
         );
